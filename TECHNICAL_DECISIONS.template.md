@@ -16,6 +16,11 @@
 
 ## 🛠️ Stack Tecnológico Elegido
 
+***********************************************************************
+USE MONGO ATLAS ONLINE EN LA NUBE PERO TAMBIEN ESTA DOCKERIZADO PARA QUE LEVANTEN LA BD Y PUEDAN CONECTAR IGUAL DEJE LAS CREDENCIALES PARA PRUEBAS SI SOLO TIENE NODE , YO USE Laragon QUE TRAE NODE MENOS MONGODB PUEDEN USAR SI TIENE SISTEMA WINDOWS
+***********************************************************************
+
+
 ### Backend
 
 | Tecnología | Versión | Razón de Elección |
