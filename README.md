@@ -196,34 +196,305 @@ Si tienes dudas sobre los requisitos, no dudes en contactarnos.
 
 # 📖 Instrucciones de Ejecución
 
-> **Nota**: Completa esta sección con las instrucciones para ejecutar tu proyecto.
-
 ## Prerrequisitos
-[Tus prerrequisitos]
 
-## Instalación
-```bash
-# Tus comandos
+- **Node.js** v18+ y `npm`
+- **MongoDB** (local o en la nube)
+- **Git** (para clonar el repositorio)
+- **Docker** (opcional, para levantar MongoDB en contenedor)
+
+---
+
+## Opción 1: Con MongoDB Atlas (Cloud) ⭐ RECOMENDADO
+
+### Instalación y Ejecución
+
+**1. Backend (en una terminal):**
+```pwsh
+cd backend
+copy .env.example .env
 ```
 
-## Configuración
-```bash
-# Variables de entorno
+**2. Actualiza `.env` con tu MongoDB Atlas URI:**
+```env
+# MongoDB Atlas Connection
+MONGO_URI=mongodb+srv://kevindbuser:kevin12345@cluster0.nckeodp.mongodb.net/?appName=Cluster0
+
+# Server Configuration
+PORT=8080
+
+# JWT Configuration
+JWT_SECRET=tu_secreto_seguro_cambiar_en_produccion
+JWT_EXPIRES_IN=7d
+
+# Bcrypt Configuration
+BCRYPT_ROUNDS=10
 ```
 
-## Ejecución
-```bash
-# Backend
-# Frontend
+**3. Instala dependencias y levanta el backend:**
+```pwsh
+npm install
+npm run start
 ```
 
-## Tests
-```bash
-# Comandos de tests
+Backend en: `http://localhost:8080/api`
+Swagger en: `http://localhost:8080/api-docs`
+
+**4. Frontend (en otra terminal):**
+```pwsh
+cd frontend
+copy .env.example .env
+npm install
+npm run dev
 ```
+
+Frontend en: `http://localhost:5173`
+
+**Ventajas de MongoDB Atlas:**
+- ✅ No requiere instalar MongoDB localmente
+- ✅ Base de datos en la nube (acceso desde cualquier lugar)
+- ✅ Backups automáticos
+- ✅ Ideal para testing remoto y demos
+
+**Nota:** Asegúrate que tu IP esté whitelistada en MongoDB Atlas.
+
+---
+
+## Opción 2: Con Docker (MongoDB en Contenedor)
+
+### Instalación y Ejecución
+
+**1. Levantar MongoDB con Docker Compose:**
+```pwsh
+# Desde la raíz del proyecto
+docker-compose up -d
+```
+
+MongoDB estará disponible en: `mongodb://localhost:27017/gestion-proyectos`
+
+**2. Backend (en otra terminal):**
+```pwsh
+cd backend
+npm install
+npm run start
+```
+
+Backend en: `http://localhost:8080/api`
+Swagger en: `http://localhost:8080/api-docs`
+
+**3. Frontend (en otra terminal):**
+```pwsh
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend en: `http://localhost:5173`
+
+**Parar Docker:**
+```pwsh
+docker-compose down
+```
+
+---
+
+## Opción 3: Sin Docker (MongoDB Local)
+
+### Instalación y Ejecución
+
+**1. Asegúrate que MongoDB esté corriendo:**
+```pwsh
+# Verifica que MongoDB esté escuchando en puerto 27017
+# En Windows, MongoDB debe estar como servicio o ejecutado manualmente
+mongod
+```
+
+**2. Backend (en una terminal):**
+```pwsh
+cd backend
+copy .env.example .env
+npm install
+npm run start
+```
+
+Backend en: `http://localhost:8080/api`
+Swagger en: `http://localhost:8080/api-docs`
+
+**3. Frontend (en otra terminal):**
+```pwsh
+cd frontend
+copy .env.example .env
+npm install
+npm run dev
+```
+
+Frontend en: `http://localhost:5173`
+
+---
+
+## Configuración de Variables de Entorno
+
+### Backend (`backend/.env`)
+
+```env
+# MongoDB Connection
+MONGO_URI=mongodb://localhost:27017/gestion-proyectos
+
+# Server Configuration
+PORT=3000
+
+# JWT Configuration
+JWT_SECRET=tu_secreto_seguro_cambiar_en_produccion
+JWT_EXPIRES_IN=7d
+
+# Bcrypt Configuration
+BCRYPT_ROUNDS=10
+```
+
+### Frontend (`frontend/.env`)
+
+```env
+# API Configuration
+VITE_API_URL=http://localhost:3000/api
+
+# Environment
+VITE_NODE_ENV=development
+```
+
+---
+
+## Verificación de Instalación
+
+**Backend levantado correctamente si ves:**
+```
+🚀 Servidor corriendo en http://localhost:3000
+📚 Documentación Swagger en http://localhost:3000/api-docs
+✅ MongoDB conectado exitosamente
+```
+
+**Frontend levantado correctamente si ves:**
+```
+VITE v[version] ready in [time] ms
+
+➜  Local:   http://localhost:5173/
+```
+
+---
+
+## Uso de la Aplicación
+
+### 1. Registrarse
+- Ve a `http://localhost:5173/register`
+- Completa el formulario con email, username y contraseña
+- Se guardará en MongoDB y obtendrá un token JWT
+
+### 2. Iniciar Sesión
+- Ve a `http://localhost:5173/login`
+- Ingresa tus credenciales
+- Se almacenará el token y accederás al dashboard
+
+### 3. Crear Proyecto
+- Click en "Nuevo Proyecto"
+- Ingresa nombre y descripción
+- Se vinculará a tu usuario automáticamente
+
+### 4. Gestionar Tareas
+- Entra a un proyecto
+- Crea tareas, asigna prioridad y estado
+- Asigna tareas a colaboradores
+
+### 5. Ver Swagger
+- Ve a `http://localhost:3000/api-docs`
+- Prueba endpoints interactivamente
+- Incluye el token JWT en el botón "Authorize"
+
+---
+
+## Testing
+
+### Backend Tests
+```pwsh
+cd backend
+npm test
+```
+
+### Frontend Tests
+```pwsh
+cd frontend
+npm test
+```
+
+**Nota**: Testing está documentado en `TECHNICAL_DECISIONS.md`. Actualmente hay validación manual via Swagger.
+
+---
 
 ## API Documentation
-- Swagger: [Tu URL]
+
+**Swagger (Recomendado):** `http://localhost:3000/api-docs`
+
+**OpenAPI JSON:** `http://localhost:3000/api-docs.json`
+
+**Endpoints principales:**
+- `POST /api/auth/register` - Registrarse
+- `POST /api/auth/login` - Iniciar sesión
+- `GET /api/users/me` - Perfil del usuario
+- `GET /api/projects` - Listar proyectos
+- `POST /api/projects` - Crear proyecto
+- `GET /api/tasks/my-tasks` - Mis tareas
+- `GET /api/projects/:id/tasks/stats` - Estadísticas del proyecto
+
+---
 
 ## Credenciales de Prueba
-[Si aplica]
+
+**Registro:** Usa cualquier email y contraseña válidos
+```
+Email: test@example.com
+Username: testuser
+Password: password123
+```
+
+El sistema genera automáticamente un JWT válido por 7 días.
+
+---
+
+## Troubleshooting
+
+### MongoDB no conecta
+- Verifica que MongoDB esté corriendo: `mongosh`
+- Si usas Docker: `docker-compose up` y espera a "healthy"
+- Verifica `MONGO_URI` en `.env`
+
+### Puerto 3000 en uso
+- Cambia `PORT` en `backend/.env` a otro puerto (ej: 3000)
+- Actualiza `VITE_API_URL` en `frontend/.env`
+
+### Frontend no encuentra API
+- Verifica que `VITE_API_URL=http://localhost:3000/api` en `.env`
+- Reinicia frontend: `npm run dev`
+
+### Error de CORS
+- Backend tiene CORS habilitado
+- Verifica que frontend apunte a URL correcta
+
+---
+
+## Stack Implementado
+
+- **Backend:** Node.js + Express.js + TypeScript + MongoDB + Mongoose + JWT
+- **Frontend:** React 18 + TypeScript + TailwindCSS + Zustand + React Router
+- **DevOps:** Docker + Docker Compose
+- **Documentation:** Swagger/OpenAPI
+
+---
+
+## Decisiones Técnicas
+
+Ver `TECHNICAL_DECISIONS.md` para detalles sobre:
+- Por qué MongoDB vs MySQL
+- Arquitectura del proyecto
+- Seguridad implementada
+- Optimizaciones
+- Trade-offs realizados
+
+````
