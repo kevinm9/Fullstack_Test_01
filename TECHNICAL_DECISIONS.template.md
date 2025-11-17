@@ -495,15 +495,23 @@ Lista de recursos que consultaste durante el desarrollo:
 
 ### Login
 [Captura de Login]
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/dc1ac6a7-2429-4d21-971e-9600052a2fa0" />
+
 
 ### Dashboard
 [Captura de Dashboard]
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/e4b9e03f-997d-4dbe-af3c-58074691f486" />
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/8f05422d-8e52-4513-81e2-1e283ad07edc" />
 
 ### Lista de Proyectos
 [Captura de Proyectos]
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/0fc54a84-475b-43e1-ad88-4a6fbbac7401" />
+
 
 ### Detalle de Tareas
 [Captura de Tareas]
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/5a914416-ff28-4d78-b623-18e0b15fd88e" />
 
 ---
 
